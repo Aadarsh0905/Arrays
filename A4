@@ -1,0 +1,43 @@
+package Arrays;
+
+import java.util.*;
+
+public class A4 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number: ");
+        int n=in.nextInt();
+        int [] arr=new int[n];
+        System.out.print("Enter the elements of the array: ");
+        for(int i=0;i<n;i++){
+            arr[i]=in.nextInt();
+        }
+        System.out.println(Arrays.toString(arr));
+        //Brutal force approach
+        // ArrayList<Integer> l=new ArrayList<>();
+        // int dup=arr[0];
+        // l.add(dup);
+        // int count =1;
+        // for(int i=1;i<n;i++){
+        //     if(arr[i]==dup) continue;
+        //     else if(arr[i]>dup) {
+        //         dup=arr[i];
+        //         l.add(arr[i]);
+        //         count++;
+        //     }
+        // }
+        // System.out.print(l);
+        // System.out.println("No. of elements in the array: "+count);
+
+        //Optimal approach
+        int i=0;
+        for(int j=1;j<n;j++){
+            if(arr[j]!=arr[i]){
+                arr[i+1]=arr[j];
+                i++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+        System.out.println("Number of elements in the array without duplicates: "+(i+1));
+    }
+}
