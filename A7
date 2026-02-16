@@ -1,0 +1,54 @@
+package Arrays;
+
+import java.util.*;
+
+public class A7 {
+     public static void main(String[] args) {
+         Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number of elements in the array: ");
+        int n=in.nextInt();
+        int [] arr=new int[n];
+        System.out.println("Enter the elements of the array: ");
+        for(int i=0;i<n;i++){
+            arr[i]=in.nextInt();
+        }
+
+        System.out.println("The actual array is: ");
+        System.out.println(Arrays.toString(arr));
+
+        //Brute approach
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(arr[i]!=0) list.add(arr[i]);
+        }
+
+        for(int i=0;i<list.size();i++){
+            arr[i]=list.get(i);
+        }
+
+        for(int i=list.size();i<n;i++){
+            arr[i]=0;
+        }
+        System.out.println(Arrays.toString(arr));
+
+        //Optimal approach
+        int j=-1;
+        for(int i=0;i<n;i++){
+            if(arr[i]==0){
+                j=i;
+                break;
+            }
+            else System.out.println("No zero is there in the array");
+        }
+
+        for(int i=j+1;i<n;i++){
+            if(arr[i]!=0){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                j++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+}
