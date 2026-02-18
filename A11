@@ -1,0 +1,38 @@
+package Arrays;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class A11 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number of elements in the array: ");
+        int n=in.nextInt();
+        int[] arr=new int[n];
+        System.out.println("Enter the elements of the array: ");
+        for(int i=1;i<n;i++){
+            arr[i]=in.nextInt();
+        }
+        
+        // //brute force approach
+        // for(int i=1;i<=n;i++){
+        //     boolean flag=false;
+        //     for(int j=0;j<n-1;j++){
+        //         if(arr[j]==i){
+        //             flag=true;
+        //             break;
+        //         }
+        //     }
+        //     if(flag==false) {
+        //         System.out.println(i);
+        //         break;
+        //     }
+        // }
+
+        //better approach
+        HashMap<Integer,Integer> hash=new HashMap<>();
+        for(int i=0;i<n;i++){
+            hash.get(hash.getOrDefault(arr[i]+1,0));
+        }
+    }
+}
