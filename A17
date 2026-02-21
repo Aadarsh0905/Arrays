@@ -1,0 +1,86 @@
+package Arrays;
+import java.util.*;
+public class A24 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number of rows in array: ");
+        int n=in.nextInt();
+        System.out.print("Enter the number of columns in array: ");
+        int m=in.nextInt();
+        int [][] mat=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                mat[i][j]=in.nextInt();
+            }
+        }
+
+        System.out.println("The given matrix is: ");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(mat[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+        //Brute force
+        // int[][] ans=new int[n][m];
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<m;j++){
+        //         ans[j][n-i-1]=mat[i][j];
+        //     }
+        // }
+
+        // System.out.println("The Rotated matrix is: ");
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         System.out.print(ans[i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+
+        //Optimal approach
+
+        //Transpose Matrix
+        for(int i=0;i<=n-2;i++){
+            for(int j=i+1;j<=n-1;j++){
+                int temp=mat[i][j];
+                mat[i][j]=mat[j][i];
+                mat[j][i]=temp;
+            }
+        }
+
+        System.out.println("The transposed matrix is: ");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                System.out.print(mat[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+        //Reverse the rows
+        reverse(mat,n,m);
+        System.out.println("The reverse part and final rotated array is: ");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                System.out.print(mat[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+
+    }
+    static void reverse(int[][] mat,int n,int m ){
+        
+        for(int i=0;i<n;i++){
+            int start=0,end=m-1;
+            while(start<=end){
+                int temp=mat[i][start];
+                mat[i][start]=mat[i][end];
+                mat[i][end]=temp;
+                start++;
+                end--;
+            }
+        }
+
+    }
+}
