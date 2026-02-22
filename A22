@@ -1,0 +1,119 @@
+package Arrays;
+import java.util.*;
+public class A29 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.println("Enter the number of elements in the array: ");
+        int n=in.nextInt();
+        if(n<=0)System.out.println("!!Error!! Invalid input!!");
+        else{
+            int[] arr=new int[n];
+            for(int i=0;i<n;i++){
+                arr[i]=in.nextInt();
+            }
+
+            //Brute
+            // Set<List<Integer>> st=new HashSet<>();
+            // for(int i=0;i<n;i++){
+            //     for(int j=i+1;j<n;j++){
+            //         for(int k=j+1;k<n;k++){
+            //             if(arr[i]+arr[j]+arr[k]==0){
+            //                 List<Integer> triplet = Arrays.asList(arr[i], arr[j], arr[k]);
+            //                 Collections.sort(triplet);
+            //                 st.add(triplet);
+            //             }
+            //         }
+            //     }
+            // }
+
+            // List<List<Integer>> l=new ArrayList<>(st);
+            // if(l.isEmpty()) System.out.println("No any triplet is there whose sum is 0");
+            // else System.out.println(l);
+
+            //Better
+            // Set<List<Integer>> st=new HashSet<>();
+            // for(int i=0;i<n;i++){
+            //     Set <Integer> hashSet=new HashSet<>();
+            //     for(int j=i+1;j<n;j++){
+            //         int third=-(arr[i]+arr[j]);
+            //         if(hashSet.contains(third)){
+            //             List<Integer> triplet=Arrays.asList(arr[i],arr[j],third);
+            //             Collections.sort(triplet);
+            //             st.add(triplet);
+            //         }
+            //         hashSet.add(arr[j]);
+            //     } 
+            // }
+            // List<List<Integer>> l=new ArrayList<>(st);
+            // if(l.isEmpty()) System.out.println("No any triplet is there whose sum is 0");
+            // else System.out.println(l);
+
+            //Optimal Approach
+            List<List<Integer>> ans=new ArrayList<>();
+            MergeSort(arr,0,n-1);
+            System.out.println(Arrays.toString(arr));
+
+            for(int i=0;i<n;i++){
+                if(i>0 && arr[i]==arr[i-1]) continue;
+                int j=i+1;
+                int k=n-1;
+                while(j<k){
+                    int sum=arr[i]+arr[j]+arr[k];
+                    if(sum<0)j++;
+                    else if(sum>0)k--;
+                    else{
+                        List<Integer> temp=Arrays.asList(arr[i],arr[j],arr[k]);
+                        ans.add(temp);
+                        j++;
+                        k--;
+                        while(j<k && arr[j]==arr[j-1])j++;
+                        while(j<k && arr[k]==arr[k+1])k--;
+
+                    }
+                }
+            }
+            if(ans.isEmpty()) System.out.println("No any triplet is there whose sum is 0");
+            else System.out.println(ans);
+
+        }
+    }
+
+    public static void MergeSort(int[] arr,int low,int high){
+        if(low==high)return;
+        int mid=(low+high)/2;
+        MergeSort(arr,low,mid);
+        MergeSort(arr,mid+1,high);
+        MergeArray(arr,low,mid,high);
+    }
+
+    public static void MergeArray(int[] arr,int low,int mid,int high){
+        ArrayList<Integer>l=new ArrayList<>();
+        int left=low;
+        int right=mid+1;
+        while(left<=mid && right<=high){
+            if(arr[left]<arr[right]){
+                l.add(arr[left]);
+                left++;
+            }
+            else{
+                l.add(arr[right]);
+                right++;
+            }
+        }
+
+        while(left<=mid){
+            l.add(arr[left]);
+            left++;
+        }
+
+        while(right<=high){
+            l.add(arr[right]);
+            right++;
+        }
+
+        for(int i=low;i<=high;i++){
+            arr[i]=l.get(i-low);
+        }
+    }
+
+}
