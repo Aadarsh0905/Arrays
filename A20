@@ -1,0 +1,91 @@
+package Arrays;
+import java.util.*;
+public class A27 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.println("Enter the number of elements in the array: ");
+        int n=in.nextInt();
+        if(n<0){
+            System.out.println("Error!! Invalid input!!");
+            return;
+        }
+        // System.out.println("Enter the value of r: ");
+        // int r=in.nextInt();
+        // if(r<0) {
+        //     System.out.println("Error!! Invalid input!!");
+        //     return;
+        // }
+
+        //To find the element from row no. and column no.
+        // System.out.println("Enter the row number in which you want to display: ");
+        // int R=in.nextInt();
+        // if(R<0) {
+        //     System.out.println("Error!! Invalid input!!");
+        //     return;
+        // }
+        // System.out.println("Enter the column no. ");
+        // int C=in.nextInt();
+        // if(C<0){
+        //     System.out.println("Error!! Invalid input!!");
+        //     return ;
+        // }
+
+        // System.out.println("The pascal value of given row and column is: " +NCR(R-1,C-1));
+        
+        //To print elements from the row
+        // for(int c=1;c<=n;c++){
+        //     System.out.println(NCR(n-1,c-1));
+        // }
+
+        //Optimal approach
+        // int ans=1;
+        // System.out.println(ans);
+        // for(int i=1;i<n;i++){
+        //     ans=ans*(n-i);
+        //     ans/=i;
+        //     System.out.println(ans);
+        // }
+
+        //To print all the elements of the pascal triangle
+        //brute
+        // ArrayList<ArrayList<Integer>> l=new ArrayList<>();
+        // for(int i=1;i<=n;i++){
+        //     ArrayList<Integer> t=new ArrayList<>();
+        //     for(int j=1;j<=i;j++){
+        //         t.add(NCR(i-1,j-1));
+        //     }
+        //     l.add(t);
+        // }
+        // for(ArrayList<Integer> list: l){
+        //     System.out.println(list);
+        // }
+
+        //Optimal approach
+        ArrayList<ArrayList<Integer>> l=new ArrayList<>();
+        for(int i=1;i<=n;i++){
+            l.add(generateRow(i));
+        }
+        System.out.println(l);
+    }
+
+    public static ArrayList<Integer> generateRow(int row){
+        long ans=1;
+        ArrayList <Integer> ansRow=new ArrayList<>();
+        ansRow.add(1);
+        for(int c=1;c<row;c++){
+            ans=ans*(row-c);
+            ans=ans/c;
+            ansRow.add((int)ans);
+        }
+        return ansRow;
+    }
+    public static int NCR(int n,int r){
+        int res=1;
+        for(int i=0;i<r;i++){
+            res=res*(n-i);
+            res=res/(i+1);
+        }
+        return res;
+        
+    }
+}
