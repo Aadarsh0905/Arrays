@@ -1,0 +1,17 @@
+package Recursion;
+
+import java.util.Scanner;
+
+public class R7 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number:");
+        int n=in.nextInt();
+        int fact=r7(n);
+        System.out.print(fact);
+    }
+    static int  r7(int n){
+        if(n==0) return 1;
+        else return n*r7(n-1);
+    }   
+}
