@@ -1,0 +1,25 @@
+//Selection Sort
+import java.util.*;
+public class S1 {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the number of elements in the array: ");
+        int n=in.nextInt();
+        int [] arr=new int[n];
+        System.out.print("Enter the elements of the array: ");
+        for(int i=0;i<n;i++){
+            arr[i]=in.nextInt();
+        }
+        for(int i=0;i<n-1;i++){
+            int min=i;
+            for(int j=i;j<n;j++){
+                if(arr[j]<arr[min]) min=j;
+                //swap
+                int temp=arr[i];
+                arr[i]=arr[min];
+                arr[min]=temp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+}
